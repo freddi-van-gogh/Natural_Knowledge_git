@@ -2,6 +2,8 @@
 
 Four connected books about how complexity accumulates, from prebiotic chemistry through biology, cognition, language, and culture, and the fact checker that tests them.
 
+<a href="https://www.amazon.com/dp/B0HQGK8BQ8?binding=kindle_edition&qid=1794270870&sr=8-1&ref=dbs_dp_rwt_sb_pc_tkin">Amazon Series</a>
+
 *By Freddi Van Gogh · [CC BY-SA 4.0](./LICENSE)*
 
 ---
