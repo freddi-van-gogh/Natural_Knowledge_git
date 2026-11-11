@@ -8,6 +8,14 @@ Four connected books about how complexity accumulates, from prebiotic chemistry 
 
 ---
 
+## Visual compendium
+
+### **[Open the visual compendium](https://freddi-van-gogh.github.io/Natural_Knowledge_git/data-vis-compendium/)**
+
+[`data-vis-compendium/`](./data-vis-compendium/) is a scrolling visual companion to the books: the processes they describe, from random jostling molecules to art, memes, and music, shown as animations, simulations you can play with, videos, and pictures, each stop labelled with how sure we are and its sources. You can also open `data-vis-compendium/index.html` on your own computer.
+
+---
+
 ## The books
 
 Each PDF is a paperback interior: the whole book, laid out for print, without its cover.
@@ -106,14 +114,6 @@ The first asks what the claim about the giraffe's nerve quotes, and how it's tie
 The books' Markdown sources aren't here, only the PDFs. So `generated/` is a saved snapshot, extracted from the same text as the printed editions, and `run.py` checks that snapshot instead of rebuilding it. (`factcheck/README.md` was written for the full source tree, where `generated/` is rebuilt on every run and not committed.)
 
 `extract.py` needs the manuscript (`book/`, `book-hs/` and `modern_alchemy/`), so its `--uncovered` and `--check-quotes` options don't run here. You can still change the rules and the existing claims and run the checker. A *new* claim will report an `[anchor]` error, though, because only `extract.py` can confirm that its quote is in the text.
-
----
-
-## Visual compendium
-
-[`data-vis-compendium/`](./data-vis-compendium/) is a scrolling visual companion to the books: the processes they describe, from random jostling molecules to art, memes, and music, shown as animations, simulations you can play with, videos, and pictures, each stop labelled with how sure we are and its sources.
-
-**Read it here:** https://freddi-van-gogh.github.io/Natural_Knowledge_git/data-vis-compendium/ (or open `data-vis-compendium/index.html` on your own computer).
 
 ---
 
