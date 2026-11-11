@@ -1,0 +1,384 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+/* The compendium's look follows the series covers: book 4's paper, book 1's slate ink,
+   book 3's verdigris for the spine and its copper for the side roads. */
+
+@font-face { font-family: "NK Libertine"; src: url("../fonts/LinLibertine_R.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "NK Libertine"; src: url("../fonts/LinLibertine_RI.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "NK Libertine"; src: url("../fonts/LinLibertine_RB.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+
+:root {
+  --ground: #F7F2E4;
+  --panel: #FFFDF7;
+  --ink: #2B2E31;
+  --ink-soft: #55595E;
+  --line: #3A786A;
+  --road-bg: rgba(201, 132, 70, 0.16);
+  --road-ink: #8A5320;
+  --accent: #B8552F;
+  --accent-text: #9A3A1E;
+  --rule: rgba(43, 46, 49, 0.18);
+  --serif: "NK Libertine", "Linux Libertine O", "Libertinus Serif", Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #2B2E31;
+    --panel: #33373A;
+    --ink: #ECE6D8;
+    --ink-soft: #C2BCB0;
+    --line: #6E9E8F;
+    --road-bg: rgba(201, 132, 70, 0.20);
+    --road-ink: #E0A872;
+    --accent: #E08A66;
+    --accent-text: #E08A66;
+    --rule: rgba(236, 230, 216, 0.2);
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--ground); color: var(--ink);
+  font-family: var(--serif); font-size: 1.7rem; line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+a { color: var(--line); }
+@media (prefers-color-scheme: dark) { a { color: #8FC2B3; } }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+header.page, footer.page, .how-made { max-width: 64rem; margin: 0 auto; padding: 2.5rem 1.25rem 1rem 3.85rem; }
+header.page > *, footer.page > *, .how-made > * { max-width: 42rem; }
+@media (max-width: 40rem) { header.page, footer.page, .how-made { padding-left: 3.25rem; } }
+header.page h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 0.4rem; font-weight: 700; text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+header.page .sub { font-style: italic; margin: 0 0 1rem; color: var(--ink-soft); }
+.order-note { color: var(--ink-soft); font-size: 1.25rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-size: 1.25rem; color: var(--ink-soft); padding: 0; list-style: none; }
+.legend li { display: flex; align-items: center; gap: 0.5rem; }
+.legend .swatch { display: inline-block; flex: none; width: 2.2rem; height: 0; border-top: 3px solid var(--line); }
+.legend .swatch.sw-gap { border-top-style: dashed; }
+.legend .swatch.sw-descriptive { border-top: 2px dotted var(--ink); opacity: 0.55; }
+
+/* ------------------------------------------------------------------ the spine */
+#spine { max-width: 64rem; margin: 0 auto; padding: 1rem 1.25rem 3rem; }
+.stop, .gap, .shift { position: relative; padding-left: 2.6rem; }
+.stop { padding-bottom: 2.75rem; }
+.stop::before, .gap::before, .shift::before {
+  content: ""; position: absolute; left: 0.62rem; top: 0; bottom: 0; width: 0;
+  border-left: 3px solid var(--line);
+}
+.stop.line-descriptive::before, .shift::before { border-left: 2px dotted var(--ink); opacity: 0.45; left: 0.68rem; }
+.gap::before { border-left: 3px dashed var(--line); opacity: 0.9; }
+.stop::after {
+  content: ""; position: absolute; left: 0.18rem; top: 0.55rem; width: 1rem; height: 1rem; border-radius: 50%;
+  background: var(--line); border: 3px solid var(--ground);
+}
+.stop[data-number*="."]::after { background: var(--ground); border: 3px solid var(--line); width: 0.85rem; height: 0.85rem; left: 0.25rem; top: 0.62rem; }
+.stop.line-descriptive::after { background: var(--ink); }
+.stop.line-descriptive[data-number*="."]::after { background: var(--ground); border-color: var(--ink); }
+.gap, .shift { padding-top: 0.6rem; padding-bottom: 2rem; }
+.gap p, .shift p { margin: 0; max-width: 42rem; font-style: italic; color: var(--ink-soft); }
+
+.stop h2 { font-size: calc(1.7rem + 0.5pt); line-height: 1.25; margin: 0 0 0.3rem; font-weight: 700; }   /* half a point above the body text, bold */
+/* The title alone is underlined, not the space beside the number or before a road's label chip. */
+.stop h2 .title, .road-panel h3 .title { text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+.stop h2 .number { color: var(--line); margin-right: 0.35rem; font-variant-numeric: lining-nums; }
+@media (prefers-color-scheme: dark) { .stop h2 .number { color: #8FC2B3; } }
+.stop .meta { margin: 0 0 0.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.stop .subtitle { font-size: 1.25rem; font-style: italic; color: var(--ink-soft); max-width: 42rem; margin: 0 0 0.75rem; }
+.stop .text { max-width: 42rem; margin: 0 0 1rem; }
+.date { font-size: 1.25rem; color: var(--ink-soft); }
+
+/* labels: tinted chips, dark text in light mode, light text in dark mode */
+.label {
+  display: inline-block; font-size: 0.8rem; line-height: 1.4; padding: 0.05rem 0.55rem; border-radius: 0.35rem;
+  font-family: var(--serif); letter-spacing: 0.01em; white-space: nowrap; vertical-align: 0.15em;
+  border: 1px solid currentColor;
+}
+.label-settled { color: #2E6B3A; background: rgba(63, 143, 70, 0.10); }
+.label-argued { color: #8A5320; background: rgba(201, 132, 70, 0.12); }
+.label-own { color: #6A3D8A; background: rgba(122, 79, 208, 0.10); }
+.label-analogy { color: #1F5A8A; background: rgba(31, 90, 138, 0.10); }
+.label-oversimplified { color: #9A3A1E; background: rgba(184, 85, 47, 0.10); }
+.label-measured { color: #22605A; background: rgba(58, 120, 106, 0.12); }
+.label-illustration { color: #4A4E54; background: rgba(43, 46, 49, 0.08); }
+.label-account { color: #7A3E12; background: rgba(184, 85, 47, 0.08); }
+@media (prefers-color-scheme: dark) {
+  .label-settled { color: #9ED5A6; } .label-argued { color: #E8B98A; } .label-own { color: #CDB2EE; }
+  .label-analogy { color: #9CC6EA; } .label-oversimplified { color: #F0A58A; } .label-measured { color: #93CFC2; }
+  .label-illustration { color: #D3CEC4; } .label-account { color: #EFB48F; }
+}
+
+/* ------------------------------------------------------------------ visuals */
+.visual { margin: 0 0 1rem; }
+.visual .caption { font-size: 1.25rem; color: var(--ink-soft); margin: 0.35rem 0 0; max-width: 42rem; }
+/* A visual's own heading, by the headings' rule: half a point above the body text, bold, and its
+   text underlined (it holds nothing else). */
+.visual-title { font-size: calc(1.7rem + 0.5pt); line-height: 1.25; margin: 0 0 0.5rem; font-weight: 700; text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+.anim-mount { position: relative; }
+.anim-mount canvas, .anim-mount svg { display: block; width: 100%; border-radius: 0.5rem; background: var(--panel); }
+.visual-todo, .video-todo {
+  border: 1px dashed var(--rule); border-radius: 0.5rem; padding: 0.9rem 1rem; color: var(--ink-soft); font-size: 0.95rem;
+  background: var(--panel);
+}
+
+.video-card {
+  display: flex; align-items: center; gap: 1rem; background: #1D1F21; color: #ECE6D8; border-radius: 0.5rem;
+  padding: 0.9rem 1rem; max-width: 42rem; font-size: 1.15rem;   /* as before the body text grew */
+}
+.video-card .play {
+  flex: 0 0 auto; width: 3.4rem; height: 3.4rem; border-radius: 50%; border: 0; cursor: pointer;
+  background: #B8552F; color: #fff; font-size: 1.3rem;
+}
+.video-meta { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+.video-title { font-weight: 700; }
+.video-channel { font-size: 0.9rem; color: #C2BCB0; }
+.video-watch { font-size: 0.9rem; color: #A9D3C6; }
+.video-card.playing { display: block; padding: 0 0 0.7rem; max-width: 52rem; }
+.video-card.playing .video-frame { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 0.5rem 0.5rem 0 0; background: #000; }
+.video-card.playing .video-meta { padding: 0.6rem 1rem 0; }
+
+.picture { margin: 0; max-width: 42rem; }
+.picture img { display: block; max-width: 100%; width: auto; height: auto; max-height: 26rem; border-radius: 0.4rem; background: var(--panel); }
+.picture > a { display: block; }
+.gallery .picture img { width: 100%; max-height: none; }
+.picture figcaption { font-size: 1.1rem; color: var(--ink-soft); margin-top: 0.3rem; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 1rem; }
+.gallery .picture img { aspect-ratio: 4 / 3; object-fit: cover; }
+
+/* ------------------------------------------------------------------ side roads */
+.roads { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0 0 1rem; align-items: flex-start; }
+.road, .road-close {
+  font: inherit; font-size: 1.25rem; line-height: 1.3; text-align: left; cursor: pointer;
+  background: var(--road-bg); color: var(--road-ink); border: 0; border-radius: 999px; padding: 0.35rem 0.95rem;
+}
+.road[aria-expanded="true"] { background: var(--road-ink); color: var(--ground); }
+.road-close { margin-top: 0.5rem; }
+.demo { align-items: center; }
+.demo-arrow { color: var(--road-ink); font-size: 1.3rem; }
+.links { font-size: 1.25rem; }
+.coda { font-style: italic; color: var(--ink-soft); }
+.road-panel {
+  flex: 1 0 100%; border-left: 3px solid #C98446; background: var(--panel); border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0.8rem 1rem 0.6rem; max-width: 52rem;
+}
+.road-panel h3 { margin: 0 0 0.35rem; font-size: calc(1.7rem + 0.5pt); font-weight: 700; }
+.road-panel p { margin: 0 0 0.7rem; max-width: 42rem; }
+
+/* ------------------------------------------------------------------ sources */
+details.sources { font-size: 1.25rem; color: var(--ink-soft); max-width: 42rem; }
+details.sources summary { cursor: pointer; }
+details.sources ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
+.dagger { color: var(--accent-text); }
+
+/* ------------------------------------------------------------------ slider (stop 1) */
+.flock-ui { margin-top: 0.6rem; }
+.flock-ui input[type=range] { width: 100%; margin: 0; accent-color: var(--line); }
+.flock-ticks { position: relative; height: 4.2rem; font-size: 0.85rem; color: var(--ink-soft); }
+.flock-ticks > .tick { position: absolute; top: 0.2rem; text-align: center; transform: translateX(-50%); line-height: 1.25; white-space: nowrap; }
+.flock-ticks > .tick.first { transform: none; text-align: left; }
+.flock-ticks > .tick.last { transform: none; text-align: right; right: 0; }
+.flock-ticks > .tick b, .flock-ticks > .tick .t { display: block; }
+.flock-ticks .label, .flock-key .label { font-size: 0.72rem; margin-top: 0.2rem; vertical-align: baseline; }
+.flock-key { display: none; list-style: none; padding: 0; margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--ink-soft); }
+.flock-key li { margin: 0.15rem 0; }
+.flock-key b { display: inline-block; min-width: 2.2rem; color: var(--ink); }
+.flock-readout { margin: 0.3rem 0 0; font-size: 1.25rem; }
+.flock-try { font-style: italic; color: var(--ink-soft); margin: 0.1rem 0 0.6rem; }
+.flock-clip { display: grid; gap: 0.6rem; }
+.flock-clip p { margin: 0; color: var(--ink-soft); font-style: italic; }
+@media (max-width: 46rem) {
+  .flock-ticks { height: 1.6rem; }
+  .flock-ticks > .tick .t, .flock-ticks > .tick .label { display: none; }
+  .flock-key { display: block; }
+}
+.flock-note { font-size: 1.25rem; color: var(--ink-soft); margin: 0 0 0.6rem; max-width: 42rem; }
+
+/* ------------------------------------------------------------------ the chemical pattern dish (stop 3) */
+/* One column, sliders under the dish, at every width; the mount narrows with it so the pause
+   button sits on the dish's corner. */
+.anim-mount:has(> .dish-ui) { max-width: 30rem; }
+.dish-ui { max-width: 30rem; }
+.dish-canvas { height: auto; aspect-ratio: 1 / 1; box-shadow: 0 0 0 1px var(--rule); cursor: crosshair; touch-action: manipulation; }
+.dish-ui label { display: block; margin: 0.8rem 0 0; font-size: 0.95rem; color: var(--ink-soft); }
+.dish-ui input[type=range] { display: block; width: 100%; margin: 0.15rem 0 0; accent-color: var(--line); }
+.dish-ticks { position: relative; height: 1.35rem; font-size: 0.8rem; line-height: 1.3; color: var(--ink-soft); }
+.dish-ticks > span { position: absolute; top: 0.05rem; transform: translateX(-50%); white-space: nowrap; }
+.dish-ticks > .first { transform: none; }
+.dish-ticks > .last { transform: none; left: auto; right: 0; }
+.dish-hint { display: block; font-style: italic; font-size: 0.9rem; color: var(--ink-soft); margin: 0.2rem 0 0; }
+.dish-buttons { display: flex; flex-wrap: wrap; gap: 0 0.6rem; }
+.dish-read { margin: 0.6rem 0 0; font-size: 1.25rem; }
+
+/* ------------------------------------------------------------------ the nitrogen cycle (stop 6.1) */
+/* The drawing beside its controls on wide screens, the controls under it on narrow ones. The
+   pause button sits on the drawing's corner either way: on wide screens it moves left past the
+   controls (1 part in 2.25 of what the 1rem gap leaves) and past the gap. */
+.ncycle-ui { display: grid; grid-template-columns: 1.25fr 1fr; gap: 1rem; align-items: start; }
+.anim-mount:has(> .ncycle-ui) > .anim-toggle { right: calc((100% - 1rem) / 2.25 + 1.5rem); }
+.ncycle-canvas { height: auto; aspect-ratio: 560 / 450; box-shadow: 0 0 0 1px var(--rule); }
+.ncycle-steps { display: grid; gap: 0.5rem; }
+.ncycle-step { display: grid; grid-template-columns: 1fr auto; gap: 0 0.6rem; align-items: end; }
+.ncycle-step label { font-size: 0.9rem; line-height: 1.3; color: var(--ink-soft); }
+/* The six sliders draw their own track. Left to itself, the browser darkens the unfilled track
+   behind a light accent colour (the two teal ones, near-black on the paper). Here every track is
+   the grey the dish's sliders show. The thumb and the filled part take the step's colour, --c, as
+   far as --p (the slider's value, 0 to 1, which sim-ncycle.js keeps). */
+.ncycle-step input[type=range] {
+  display: block; width: 100%; height: 16px; margin: 0.2rem 0 0; -webkit-appearance: none; appearance: none; background: transparent;
+  --track: #EFEFEF; --track-edge: #B2B2B2;
+}
+@media (prefers-color-scheme: dark) { .ncycle-step input[type=range] { --track: #3B3B3B; --track-edge: #858585; } }
+.ncycle-step input[type=range]::-webkit-slider-runnable-track {
+  box-sizing: border-box; height: 8px; border: 1px solid var(--track-edge); border-radius: 4px;
+  background: linear-gradient(to right, var(--c) calc(var(--p) * (100% - 16px) + 8px), var(--track) 0);
+}
+.ncycle-step input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 16px; height: 16px; margin-top: -5px; border: 0; border-radius: 50%; background: var(--c);
+}
+.ncycle-step input[type=range]::-moz-range-track { box-sizing: border-box; height: 8px; border: 1px solid var(--track-edge); border-radius: 4px; background: var(--track); }
+.ncycle-step input[type=range]::-moz-range-progress { height: 8px; border-radius: 4px; background: var(--c); }
+.ncycle-step input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: var(--c); }
+.ncycle-ui .ncycle-kill { margin: 0; min-width: 4.8rem; padding: 0.15rem 0.8rem; font-size: 0.9rem; }   /* as wide as "revive", so the slider holds still */
+.ncycle-ui .ncycle-kill.is-dead { background: var(--accent-text); border-color: var(--accent-text); color: var(--ground); }
+.ncycle-ui .ncycle-reset { justify-self: start; margin-top: 0.2rem; }
+.ncycle-pools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; margin: 0.8rem 0 0; font-size: 0.8rem; line-height: 1.25; color: var(--ink-soft); }
+.ncycle-pools .pool { background: var(--panel); border-radius: 0.4rem; padding: 0.3rem 0.45rem 0.45rem; box-shadow: 0 0 0 1px var(--rule); }
+.ncycle-pools .bar { display: block; height: 0.55rem; margin-top: 0.25rem; border-radius: 999px; overflow: hidden; background: var(--rule); }
+.ncycle-pools .bar i { display: block; height: 100%; }
+/* Two lines high at least, so the layout below holds still when the message changes length; three
+   on a phone, where two of the four messages take three. */
+.ncycle-msg { margin: 0.6rem 0 0; font-size: 1.25rem; line-height: 1.55; min-height: 3.1em; }
+@media (max-width: 40rem) { .ncycle-msg { min-height: 4.65em; } }
+.ncycle-msg .warn { color: var(--accent-text); font-weight: 700; }
+@media (max-width: 52rem) {
+  .anim-mount:has(> .ncycle-ui) { max-width: 36rem; }
+  .ncycle-ui { grid-template-columns: 1fr; }
+  .anim-mount:has(> .ncycle-ui) > .anim-toggle { right: 0.5rem; }
+}
+
+/* ------------------------------------------------------------------ small screens */
+@media (max-width: 40rem) {
+  body { font-size: 1.55rem; }
+  .video-card { font-size: 1.05rem; }
+  .stop, .gap, .shift { padding-left: 2rem; }
+  .stop::before, .gap::before, .shift::before { left: 0.4rem; }
+  .stop::after { left: -0.04rem; }
+  .stop[data-number*="."]::after { left: 0.03rem; }
+  .stop h2 { font-size: calc(1.55rem + 0.5pt); }
+  .road-panel h3 { font-size: calc(1.55rem + 0.5pt); }
+  .visual-title { font-size: calc(1.55rem + 0.5pt); }
+  .gallery { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+}
+
+footer.page { font-size: 0.9rem; color: var(--ink-soft); padding-bottom: 3rem; }
+.how-made { font-size: 1.25rem; }
+.how-made h2 { font-size: calc(1.25rem + 0.5pt); text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+
+/* ------------------------------------------------------------------ 6.6 the march */
+.march-svg { display: block; width: 100%; height: auto; background: var(--panel); border-radius: 0.5rem; }
+.march-svg .fig { fill: var(--ink); transition: transform 1.3s ease; }
+.march-svg .ground { stroke: var(--rule); stroke-width: 2; transition: opacity 0.6s; }
+.march-svg .bush-lines path { fill: none; stroke: var(--line); stroke-width: 5; stroke-linejoin: round; opacity: 0; transition: opacity 0.9s 0.4s; }
+.march-svg .bush-today, .march-svg .bush-past { font-size: 26px; fill: var(--ink-soft); font-style: italic; opacity: 0; transition: opacity 0.9s 0.4s; }
+.march-svg.is-bush .bush-lines path, .march-svg.is-bush .bush-today, .march-svg.is-bush .bush-past { opacity: 1; }
+.march-svg.is-bush .ground { opacity: 0; }
+.march-svg.walking:not(.is-bush) .fig { animation: nk-bob 0.8s ease-in-out infinite alternate; }
+.march-svg.walking .fig:nth-child(odd) { animation-delay: 0.4s; }
+@keyframes nk-bob { from { translate: 0 0; } to { translate: 0 -7px; } }
+.march-toggle, .pattern-tools button, .dish-buttons button, .ncycle-ui button {
+  font: inherit; font-size: 0.95rem; margin-top: 0.6rem; padding: 0.4rem 1rem; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--ink); background: transparent; color: var(--ink);
+}
+.march-toggle:hover, .pattern-tools button:hover, .dish-buttons button:hover, .ncycle-ui button:hover { background: var(--ink); color: var(--ground); }
+.march-note { font-style: italic; margin: 0.5rem 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  .march-svg .fig, .march-svg .bush-lines path, .march-svg .bush-today, .march-svg .bush-past { transition: none; animation: none !important; }
+}
+
+/* ------------------------------------------------------------------ 7 pattern recognition */
+.pattern-board { display: block; width: 100%; border-radius: 0.5rem; cursor: crosshair; touch-action: manipulation; }
+.pattern-tools { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.pattern-tools button[aria-pressed="true"] { background: var(--ink); color: var(--ground); }
+.colour-dot { display: inline-block; width: 0.75rem; height: 0.75rem; border-radius: 50%; vertical-align: -0.05em; }
+.colour-dot.red { background: #B8552F; } .colour-dot.blue { background: #1F5A8A; }
+.pattern-line { font-style: italic; margin: 0.5rem 0 0; }
+
+/* ------------------------------------------------------------------ 8 the language tree */
+.langtree-svg { display: block; width: 100%; height: auto; background: var(--panel); border-radius: 0.5rem; }
+.langtree-svg .lt-lines path { fill: none; stroke: var(--line); stroke-width: 2; }
+.langtree-svg text { fill: var(--ink); font-family: var(--serif); }
+.langtree-svg .lt-word { font-style: italic; font-size: 26px; }
+.langtree-svg .lt-lang { font-size: 16px; fill: var(--ink-soft); }
+.langtree-svg .lt-branch { font-size: 16px; font-weight: 700; fill: var(--line); }
+.langtree-svg .lt-root { font-size: 24px; font-weight: 700; }
+
+/* ------------------------------------------------------------------ 9 the quilt */
+.quilt-svg, .anim-mount .quilt-svg { display: block; width: 100%; height: auto; background: #2B2E31; border-radius: 0.5rem; }
+.quilt-svg .q-hem { fill: none; stroke: rgba(255, 255, 255, 0.55); stroke-width: 2; stroke-dasharray: 7 6; }
+.quilt-svg .q-label { fill: #fff; font-size: 24px; font-weight: 700; font-family: var(--serif); }
+.quilt-svg .q-person { fill: rgba(255, 255, 255, 0.85); }
+.quilt-svg .q-patch.archaic .q-label { font-style: italic; }
+.quilt-svg .q-seam { fill: none; stroke-linecap: round; }
+.quilt-svg .q-seam.migration { stroke: #F7F2E4; stroke-width: 4; stroke-dasharray: 10 8; }
+.quilt-svg .q-seam.admixture { stroke: #F2C14E; stroke-width: 6; stroke-dasharray: 1 10; }
+.quilt-svg .q-legend text, .quilt-svg .q-share { fill: #ECE6D8; font-size: 20px; font-family: var(--serif); }
+/* SVG text is sized in the drawing's units, which shrink with it. anim-quilt.js sets --q-scale
+   (rendered width / viewBox width), so the two sourced shares, the legend, and the caption never
+   fall below 11 px on screen. On a phone the caption wraps, and the drawing grows to hold it. */
+.quilt-svg .q-share { font-size: max(11px / var(--q-scale, 1), 20px); }
+.quilt-svg .q-legend text { font-size: max(11px / var(--q-scale, 1), 20px); }
+/* A slate halo, so a share still reads where a seam or a hem passes behind it. */
+.quilt-svg .q-share { paint-order: stroke; stroke: #2B2E31; stroke-width: 6px; stroke-linejoin: round; }
+.quilt-svg .q-caption { font-style: italic; }
+@media (max-width: 40rem) {
+  .quilt-svg .q-label { font-size: 32px; }
+  .quilt-svg .q-legend text { font-size: max(11px / var(--q-scale, 1), 28px); }
+}
+
+/* ------------------------------------------------------------------ pause / play (every moving animation) */
+.anim-toggle {
+  position: absolute; top: 0.5rem; right: 0.5rem; z-index: 2;
+  font: inherit; font-size: 0.85rem; padding: 0.25rem 0.75rem; border-radius: 999px; border: 0; cursor: pointer;
+  background: rgba(29, 31, 33, 0.78); color: #fff;
+}
+
+/* ------------------------------------------------------------------ the credits page */
+.credits-page { max-width: 46rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; font-size: 1rem; }
+.credits-page h2 { font-size: 1.15rem; margin: 1.6rem 0 0.4rem; }
+.credits-page li { margin: 0.35rem 0; }
+.credits-page .where { color: var(--ink-soft); }
+
+/* ------------------------------------------------------------------ 6.2 Anabaena */
+.anabaena-svg, .anim-mount .anabaena-svg { display: block; width: 100%; height: auto; background: #FFFDF7; border-radius: 0.5rem; }
+.anabaena-svg text { font-family: var(--serif); fill: #2B2E31; }
+.anabaena-svg .ab-title { font-size: 24px; font-weight: 700; }
+.anabaena-svg .ab-title-n { font-size: 20px; font-weight: 700; }
+.anabaena-svg .ab-label { font-size: 21px; }
+.anabaena-svg .ab-small { font-size: 18px; }
+.anabaena-svg .ab-strong { font-weight: 700; }
+.anabaena-svg .ab-bubble { fill: none; stroke: #6E9E8F; stroke-width: 1.5; }
+
+/* ------------------------------------------------------------------ 6.3 sponges */
+.sponge-svg, .anim-mount .sponge-svg { display: block; width: 100%; height: auto; background: #FFFDF7; border-radius: 0.5rem; }
+.sponge-svg text { font-family: var(--serif); fill: #2B2E31; }
+.sponge-svg .sp-label { font-size: 21px; }
+.sponge-svg .sp-small { font-size: 18px; }
+.sponge-svg .sp-strong { font-weight: 700; }
+
+/* ------------------------------------------------------------------ 10.1 tree rings */
+.rings-svg, .anim-mount .rings-svg { display: block; width: 100%; height: auto; background: #FFFDF7; border-radius: 0.5rem; }
+.rings-svg text { font-family: var(--serif); fill: #2B2E31; }
+.rings-svg .rg-label { font-size: 21px; }
+.rings-svg .rg-small { font-size: 18px; }
+.rings-svg .rg-strong { font-weight: 700; }
+.rings-svg .rg-soft { fill: #55595E; }
+.rings-svg .rg-note { font-style: italic; }
+
+/* ------------------------------------------------------------------ 10.2 pyramids */
+.pyr-svg, .anim-mount .pyr-svg { display: block; width: 100%; height: auto; background: #FFFDF7; border-radius: 0.5rem; }
+.pyr-svg text { font-family: var(--serif); fill: #2B2E31; }
+.pyr-svg .py-name { font-size: 21px; font-weight: 700; }
+.pyr-svg .py-small { font-size: 18px; }
+.pyr-svg .py-name-n { font-size: 18px; font-weight: 700; }
+.pyr-svg .py-small-n { font-size: 17px; }
+.pyr-svg .py-soft { fill: #55595E; }

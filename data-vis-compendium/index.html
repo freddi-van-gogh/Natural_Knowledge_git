@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- The code in this file is GPL-3.0; its prose is CC BY-SA 4.0. -->
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Natural Knowledge: a visual compendium</title>
+  <meta name="description" content="A scrolling visual companion to the Natural Knowledge series: from random jostling molecules to art, memes, and music.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="page">
+    <h1>Natural Knowledge: a visual compendium</h1>
+    <p class="sub">A companion to the <i>Natural Knowledge</i> series, from random jostling molecules to art, memes, and music.</p>
+    <p>Scroll down the line. Each stop shows one step the books describe; the side roads (↳) open in place and close again without losing your place. Every stop says how sure we are, and lists its sources.</p>
+    <p class="order-note">The order follows the books' ideas, with dates where they matter.</p>
+    <ul class="legend">
+      <li><span class="swatch"></span> the account is firm</li>
+      <li><span class="swatch sw-gap"></span> a gap the books name: how heredity began</li>
+      <li><span class="swatch sw-descriptive"></span> from language on: the same words, not the same machinery</li>
+    </ul>
+    <p class="demo-hint">Scroll down: each stop is one more layer of order than the last. Buttons like this one are side roads:</p>
+    <div id="demo"></div>
+  </header>
+
+  <main id="spine"></main>
+
+  <section class="how-made" id="how-this-was-made">
+    <h2>How this was made</h2>
+    <p>The ideas, the questions, and the decisions in this compendium are the author's. The author set out what it should show and in what order, and chose the stops and side roads. AI assistants turned that into pages, checked it against sources, and raised questions where the notes were wrong or unclear. The author answered them, made editorial calls, and drafted some text sections themselves.</p>
+    <p>In the terms publishers now use, the text is AI-generated: an AI drafted the bulk of the compendium alongside author inputs and rewrites, working from the author's notes and choices and from sources that AI research assistants gathered and checked. The animations, simulations, and drawings were also made with an AI assistant, in code. The videos and pictures by others are credited to them.</p>
+  </section>
+
+  <footer class="page">
+    <p>Code: GPL-3.0 (<a href="LICENSE-CODE.txt">LICENSE-CODE.txt</a>). Text, data, and our own pictures: CC BY-SA 4.0, like the books. Others' pictures and videos keep their own licences: see the <a href="credits.html">credits</a>. Fonts: Linux Libertine (<a href="fonts/OFL.txt">OFL 1.1</a>).</p>
+    <p>The books and the fact checker behind them are in <a href="../">the repository</a>.</p>
+  </footer>
+
+  <script src="js/core.js"></script>
+  <script src="js/media.js"></script>
+  <script src="js/anim.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/sim-flock.js"></script>
+  <script src="js/sim-dish.js"></script>
+  <script src="js/sim-ncycle.js"></script>
+  <script src="js/anim-dye.js"></script>
+  <script src="js/anim-vesicle.js"></script>
+  <script src="js/anim-autocat.js"></script>
+  <script src="js/anim-protocell.js"></script>
+  <script src="js/anim-selection.js"></script>
+  <script src="js/anim-march.js"></script>
+  <script src="js/anim-pattern.js"></script>
+  <script src="js/anim-langtree.js"></script>
+  <script src="js/anim-quilt.js"></script>
+  <script src="js/anim-anabaena.js"></script>
+  <script src="js/anim-sponge.js"></script>
+  <script src="js/anim-rings.js"></script>
+  <script src="js/anim-pyramids.js"></script>
+  <script src="content/pictures.js"></script>
+  <script src="content/stops.js"></script>
+  <script>
+    document.getElementById("demo").innerHTML = NKC.demoHtml();
+    NKC.renderSpine(NKC.ENTRIES, document.getElementById("spine"));
+  </script>
+</body>
+</html>

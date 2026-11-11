@@ -2,7 +2,7 @@
 
 Four connected books about how complexity accumulates, from prebiotic chemistry through biology, cognition, language, and culture, and the fact checker that tests them.
 
-<a href="https://www.amazon.com/dp/B0HQGK8BQ8?binding=kindle_edition&qid=1794270870&sr=8-1&ref=dbs_dp_rwt_sb_pc_tkin">Amazon Series</a>
+<a href="https://www.amazon.com/dp/B0HQGK8BQ8">Amazon Series</a>
 
 *By Freddi Van Gogh · [CC BY-SA 4.0](./LICENSE)*
 
@@ -109,6 +109,14 @@ The books' Markdown sources aren't here, only the PDFs. So `generated/` is a sav
 
 ---
 
+## Visual compendium
+
+[`data-vis-compendium/`](./data-vis-compendium/) is a scrolling visual companion to the books: the processes they describe, from random jostling molecules to art, memes, and music, shown as animations, simulations you can play with, videos, and pictures, each stop labelled with how sure we are and its sources.
+
+**Read it here:** https://freddi-van-gogh.github.io/Natural_Knowledge_git/data-vis-compendium/ (or open `data-vis-compendium/index.html` on your own computer).
+
+---
+
 ## How this was written
 
 The book is a synthesis of the author's own notes, worked through in extended conversation with several large language models — principally OpenAI's ChatGPT (GPT-5.4) and Anthropic's Claude. Google's Gemini was also used to summarize parts of the email correspondence, and other tools were used occasionally. The ideas, the selection, the structure, and the judgement about what survives scrutiny are the author's. A substantial amount of the prose was drafted by machine and then revised.
@@ -120,6 +128,8 @@ This is stated plainly rather than buried: a book arguing for making compression
 ## Licence
 
 [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](./LICENSE).
+
+The compendium's code (`data-vis-compendium/`) is GPL-3.0; its text and our pictures are CC BY-SA 4.0, and others' pictures keep their own licences (see its `CREDITS.md`).
 
 Share it, remix it, build on it, sell it — but credit the source and release what you build under the same terms.
 
