@@ -22,7 +22,7 @@ Each PDF is a paperback interior: the whole book, laid out for print, without it
 
 | # | Book | PDF | Pages |
 |---|---|---|---:|
-| 1 | *Natural Knowledge* (main edition): spirals, memes, and art | [Natural_Knowledge-paperback-interior.pdf](./Natural_Knowledge-paperback-interior.pdf) | 220 |
+| 1 | *Natural Knowledge* (main edition): spirals, memes, and art | [Natural_Knowledge-paperback-interior.pdf](./Natural_Knowledge-paperback-interior.pdf) | 222 |
 | 2 | *Natural Knowledge* (high school edition): spirals, memes, and art | [Natural_Knowledge_High_School_Edition-paperback-interior.pdf](./Natural_Knowledge_High_School_Edition-paperback-interior.pdf) | 144 |
 | 3 | *Modern Alchemy*: a reference apparatus for Natural Knowledge (expanded edition) | [Modern_Alchemy_Expanded_Edition-paperback-interior.pdf](./Modern_Alchemy_Expanded_Edition-paperback-interior.pdf) | 82 |
 | 4 | *Prolog Logicbase*: the fact checker behind Natural Knowledge | [Prolog_Logicbase-paperback-interior.pdf](./Prolog_Logicbase-paperback-interior.pdf) | 118 |
